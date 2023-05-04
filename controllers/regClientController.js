@@ -7,6 +7,7 @@ import Sale from '../models/Sale.js'
 import SaleDetail from "../models/SaleDetail.js";
 import Shipping from "../models/Shipping.js";
 import cryptoRandomString from 'crypto-random-string';
+import axios from 'axios'
 
 const createCart = async (req, res) => {
     const cart = new Cart(req.body)
