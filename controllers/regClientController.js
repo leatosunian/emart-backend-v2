@@ -122,13 +122,13 @@ const createSale = async (req, res) => {
 }
 
 const saveVerification = async (req, res) => {
-    const paymentInfo = req.body
+    /*const paymentInfo = req.body
     // GET PAYMENT INFO BY ID //
     axios.post('https://api.mercadopago.com/v1/payments/'+paymentInfo.data.id, {
         headers: {
             "Content-Type": 'application/json',
             // ADD TOKEN IN ENV FILE FOR PRODUCTION  //
-            "Authorization" : `Bearer TEST-4373948009132150-042809-2cfe84e84e2a6d0601b54c35bc8f5881-172136330`
+            "Authorization" : 'Bearer TEST-4373948009132150-042809-2cfe84e84e2a6d0601b54c35bc8f5881-172136330'
         }
     }).then( async (response) => {
         const {data} = response
@@ -154,7 +154,7 @@ const saveVerification = async (req, res) => {
         }
     }).catch( error => {
         console.log(error)
-    }) 
+    }) */
     return res.status(200)
 }
 
