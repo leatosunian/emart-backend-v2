@@ -6,6 +6,7 @@ import Category from "../models/Category.js";
 import Subcategory from "../models/Subcategory.js";
 import USDSettings from "../models/USDSettings.js"
 import USDLogs from "../models/USDLogs.js"
+import axios from 'axios'
 
 const getLatestProducts = async (req, res) => {
     const latestProducts = await Product.find().sort({createdAt: -1}).limit(4)
@@ -112,10 +113,18 @@ const getShippingData = async (req, res) => {
 
 const getUSDSettings = async (req, res) => {
     const USDValue = await USDSettings.find()
+    axios.get('http://localhost:4000/api/getshippingdata', {
+        headers: {
+            "Content-Type": 'application/json',
+        }
+        }).then((response) => {
+            const {data} = response
+            console.log(data);
+        }).catch( error => {
+            console.log(error.response.data)
+        }) 
     return res.status(200).json(USDValue)
 }
-
-
 
 export {
     getLatestProducts,

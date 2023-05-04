@@ -19,7 +19,8 @@ const saleSchema = mongoose.Schema({
     },
     status: {
         type: String,
-        required: true
+        required: false,
+        default: 'created'
     },
     statusStr: {
         type: String,
@@ -36,7 +37,8 @@ const saleSchema = mongoose.Schema({
     },
     transaction: {
         type: String,
-        required: true
+        required: false,
+        default: ''
     },
     year: {
         type: Number,
