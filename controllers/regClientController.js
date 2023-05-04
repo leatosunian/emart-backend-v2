@@ -155,7 +155,8 @@ const saveVerification = async (req, res) => {
     }).catch( error => {
         console.log(error)
     }) */
-    return res.status(200)
+    console.log(req.body);
+    return res.status(200).send('OK')
 }
 
 const getOrderData = async (req, res) => {
