@@ -136,13 +136,13 @@ const saleVerification = async (req, res) => {
         const saleToUpdate = await Sale.findOne({_id:data.metadata.sale_id})
         console.log(saleToUpdate);
         saleToUpdate.transaction = data.id
-        if (saleToUpdate.length > 0 && data.status == 'pending'){
+        if (saleToUpdate && data.status == 'pending'){
             saleToUpdate.status = 'pending'
-            console.log('status updated to pending')
             await saleToUpdate.save()
+            console.log('status updated to pending')
         }
 
-        if (saleToUpdate.length > 0 && data.status == 'approved'){
+        if (saleToUpdate && data.status == 'approved'){
             saleToUpdate.status = 'approved'
             await saleToUpdate.save()
             console.log('status updated to approved')
