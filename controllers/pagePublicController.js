@@ -113,16 +113,6 @@ const getShippingData = async (req, res) => {
 
 const getUSDSettings = async (req, res) => {
     const USDValue = await USDSettings.find()
-    axios.get('http://localhost:4000/api/getshippingdata', {
-        headers: {
-            "Content-Type": 'application/json',
-        }
-        }).then((response) => {
-            const {data} = response
-            console.log(data);
-        }).catch( error => {
-            console.log(error.response.data)
-        }) 
     return res.status(200).json(USDValue)
 }
 
