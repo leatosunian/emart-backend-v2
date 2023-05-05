@@ -79,7 +79,6 @@ const createSale = async (req, res) => {
     sale.year = new Date().getFullYear()
     sale.month = new Date().getMonth()+1
     sale.day = new Date().getDate()
-    sale.status = 'approved'
     sale.orderNumber = cryptoRandomString({length: 10, type: 'numeric'})
 
     const saveSale = await sale.save()
