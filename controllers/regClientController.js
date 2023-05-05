@@ -151,9 +151,9 @@ const saleVerification = async (req, res) => {
             console.log(saleDetails);
             for(const item of saleDetails){
                 try {
-                    const variant = await Variant.findById(saleDetails.variant)
+                    const variant = await Variant.findById(item.variant)
                     const newStock = variant.stock - item.items
-                    await Variant.findByIdAndUpdate(saleDetails.variant, {stock: newStock})
+                    await Variant.findByIdAndUpdate(item.variant, {stock: newStock})
                     console.log('stock updated')
                 } catch (error) {
                     console.log('stock cannot be updated');
