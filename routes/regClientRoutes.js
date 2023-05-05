@@ -1,5 +1,5 @@
 import express from 'express'
-import { createCart, getCart, deleteItemFromCart, saveAddress, getAddressData, deleteAddress, saleValidatePaymentId, createSale, getOrderData, getOrders, getShippingMethods, saveVerification } from '../controllers/regClientController.js'
+import { createCart, getCart, deleteItemFromCart, saveAddress, getAddressData, deleteAddress, saleValidatePaymentId, createSale, getOrderData, getOrders, getShippingMethods, saleVerification } from '../controllers/regClientController.js'
 import checkClientAuth from '../middlewares/clientAuthMiddleware.js'
 
 const router = express.Router()
@@ -22,6 +22,6 @@ router.get('/shipping/methods/:id', checkClientAuth, getShippingMethods)
 router.post('/sales/save', checkClientAuth, createSale)
 
 // WEBHOOK ROUTES //
-router.post('/sales/webhook', saveVerification)
+router.post('/sales/webhook', saleVerification)
 
 export default router

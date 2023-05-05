@@ -121,8 +121,9 @@ const createSale = async (req, res) => {
     return res.status(200).json(saveSale)
 }
 
-const saveVerification = async (req, res) => {
-    /*const paymentInfo = req.body
+const saleVerification = async (req, res) => {
+    const paymentInfo = req.body
+    console.log(paymentInfo)
     // GET PAYMENT INFO BY ID //
     axios.post('https://api.mercadopago.com/v1/payments/'+paymentInfo.data.id, {
         headers: {
@@ -132,14 +133,19 @@ const saveVerification = async (req, res) => {
         }
     }).then( async (response) => {
         const {data} = response
+        console.log(data)
         const saleToUpdate = await Sale.findOne({_id:data.metadata.saleID})
         saleToUpdate.transaction = data.id
         if (saleToUpdate.length > 0 && data.status === 'pending'){
             saleToUpdate.status = 'pending'
+            console.log('status updated to pending')
+            await saleToUpdate.save()
         }
 
         if (saleToUpdate.length > 0 && data.status === 'approved'){
             saleToUpdate.status = 'approved'
+            await saleToUpdate.save()
+            console.log('status updated to approved')
             // UPDATE STOCK //
             const saleDetails = await SaleDetail.find({sale:saleToUpdate._id})
             for(const item of saleDetails){
@@ -147,14 +153,15 @@ const saveVerification = async (req, res) => {
                     const variant = await Variant.findById(saleDetails.variant)
                     const newStock = variant.stock - item.items
                     await Variant.findByIdAndUpdate(saleDetails.variant, {stock: newStock})
+                    console.log('stock updated')
                 } catch (error) {
-                    console.log(error);
+                    console.log('stock cannot be updated');
                 }
             }
         }
     }).catch( error => {
         console.log(error)
-    }) */
+    }) 
     console.log(req.body);
     return res.status(200).send('OK')
 }
@@ -187,8 +194,6 @@ const getShippingMethods = async (req, res) => {
 }
 
 
-
-
 export {
     createCart,
     getCart,
@@ -201,5 +206,5 @@ export {
     getOrderData,
     getOrders,
     getShippingMethods,
-    saveVerification
+    saleVerification
 }
