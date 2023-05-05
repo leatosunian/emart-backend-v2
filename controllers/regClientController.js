@@ -124,7 +124,7 @@ const saleVerification = async (req, res) => {
     const paymentInfo = req.body
     console.log(paymentInfo)
     // GET PAYMENT INFO BY ID //
-    axios.post('https://api.mercadopago.com/v1/payments/'+paymentInfo.data.id, {
+    axios.get('https://api.mercadopago.com/v1/payments/'+paymentInfo.data.id, {
         headers: {
             "Content-Type": 'application/json',
             // ADD TOKEN IN ENV FILE FOR PRODUCTION  //
