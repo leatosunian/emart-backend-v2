@@ -147,7 +147,8 @@ const saleVerification = async (req, res) => {
             await saleToUpdate.save()
             console.log('status updated to approved')
             // UPDATE STOCK //
-            const saleDetails = await SaleDetail.find({sale:saleToUpdate._id})
+            const saleDetails = await SaleDetail.find({sale:data.metadata.sale_id})
+            console.log(saleDetails);
             for(const item of saleDetails){
                 try {
                     const variant = await Variant.findById(saleDetails.variant)
