@@ -67,10 +67,10 @@ const getAddressData = async (req, res) => {
     }
 }
 
-const saleValidatePaymentId = async (req, res) => {
+const getSaleAfterPayment = async (req, res) => {
     const {payment_id} = req.params
-    const sales = await Sale.find({transaction:payment_id})
-    return res.status(200).json(sales)
+    const sale = await Sale.find({transaction:payment_id})
+    return res.status(200).json(sale)
 }
 
 const createSale = async (req, res) => {
@@ -136,12 +136,19 @@ const saleVerification = async (req, res) => {
         const saleToUpdate = await Sale.findOne({_id:data.metadata.sale_id})
         console.log(saleToUpdate);
         saleToUpdate.transaction = data.id
-        if(data.status == 'pending'){
+        // PAYMENT PENDING //
+        if(data.status == 'pending' || data.status == 'in_process'){
             saleToUpdate.status = 'pending'
             await saleToUpdate.save()
             console.log('status updated to pending')
         }
-
+        // PAYMENT DENIED //
+        if(data.status == 'rejected' || data.status == 'cancelled'){
+            saleToUpdate.status = 'rejected'
+            await saleToUpdate.save()
+            console.log('status updated to rejected')
+        }
+        // PAYMENT APPROVED //
         if(data.status == 'approved'){
             saleToUpdate.status = 'approved'
             await saleToUpdate.save()
@@ -202,10 +209,10 @@ export {
     saveAddress,
     getAddressData,
     deleteAddress,
-    saleValidatePaymentId,
     createSale,
     getOrderData,
     getOrders,
     getShippingMethods,
-    saleVerification
+    saleVerification,
+    getSaleAfterPayment
 }
