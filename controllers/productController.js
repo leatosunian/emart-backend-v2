@@ -115,7 +115,7 @@ const editProduct = async (req, res) => {
     const product = await Product.findById(id)
     console.log(req.files.image);
     if(req.files.image ){
-        const imgPath = req.files.image.path.split('\\')
+        const imgPath = req.files.image.path.split('//')
         const imgString = imgPath[2]
         console.log(imgPath);
         console.log(imgString);
