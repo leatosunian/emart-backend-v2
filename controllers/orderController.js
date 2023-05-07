@@ -19,7 +19,7 @@ const getOrders = async (req, res) => {
 const getPendingOrders = async (req, res) => {
     const {statusStr} = req.params
 
-    const orders = await Sale.find({statusStr: 'En preparación'}).sort({createdAt: -1}).populate('client').populate('address')
+    const orders = await Sale.find({statusStr: 'En preparación', status:'approved'}).sort({createdAt: -1}).populate('client').populate('address')
     return res.status(200).json(orders)
 }
 

@@ -166,7 +166,7 @@ const getClientsLength = async (req, res) => {
 }
 
 const getSalesLength = async (req, res) => {
-    const sales = await Sale.find()
+    const sales = await Sale.find({status:'approved'})
     return res.status(200).json(sales)
 }
 
