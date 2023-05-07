@@ -111,6 +111,8 @@ const deleteProduct = async (req, res) => {
 }   
 
 const editProduct = async (req, res) => {
+    console.log(req);
+    console.log(req.files);
     console.log(req.files.image);
     const {id} = req.params
     const product = await Product.findById(id)
