@@ -118,6 +118,7 @@ const editProduct = async (req, res) => {
         const imgPath = req.files.image.path.split('\\')
         const imgString = imgPath[2]
         console.log(imgPath);
+        console.log(imgString);
         product.image = imgString
     }
 
