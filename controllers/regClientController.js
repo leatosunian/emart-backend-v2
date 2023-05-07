@@ -98,13 +98,11 @@ const createSale = async (req, res) => {
 
 const saleVerification = async (req, res) => {
     const paymentInfo = req.body
-    console.log(paymentInfo)
     // GET PAYMENT INFO BY ID //
     axios.get('https://api.mercadopago.com/v1/payments/'+paymentInfo.data.id, {
         headers: {
             "Content-Type": 'application/json',
-            // ADD TOKEN IN ENV FILE FOR PRODUCTION  //
-            "Authorization" : 'Bearer TEST-4373948009132150-042809-2cfe84e84e2a6d0601b54c35bc8f5881-172136330'
+            "Authorization" : `Bearer ${process.env.MPKEYAUTH}`
         }
     }).then( async (response) => {
         const {data} = response
