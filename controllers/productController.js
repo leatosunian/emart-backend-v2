@@ -115,7 +115,7 @@ const editProduct = async (req, res) => {
     const product = await Product.findById(id)
     console.log(req.files.image);
     if(req.files.image ){
-        const imgPath = req.files.image.path.split('\\')
+        const imgPath = req.files.image.path.split('')
         const imgString = imgPath[2]
         console.log(imgPath);
         console.log(imgString);
@@ -149,7 +149,8 @@ const editProduct = async (req, res) => {
         const editedProduct = await product.save()
         return res.status(200).json(editedProduct)
     } catch (error) {
-        console.log(error)
+        console.log(req.files.image)
+        return res.status(200).json(req.files.image)
     }
 }
 
