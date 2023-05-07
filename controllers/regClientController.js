@@ -89,34 +89,10 @@ const createSale = async (req, res) => {
         item.day = new Date().getDate()
         item.sale = sale._id
         const saleDetail = new SaleDetail(item)
-        console.log(saleDetail);
         const savedSaleDetail = await saleDetail.save()
-
-        // UPDATE STOCK //
-
-        /*try {
-            const variant = await Variant.findById(saleDetail.variant)
-            const newStock = variant.stock - item.items
-            await Variant.findByIdAndUpdate(saleDetail.variant, {stock: newStock})
-        } catch (error) {
-            console.log(error);
-        }*/
-
-        // DELETE VARIANT IF STOCK === 0 //
-
-        /* try {
-            const variant = await Variant.findById(saleDetail.variant)
-            if(variant.stock === 0){
-                const variant = await Variant.findOneAndRemove({_id: saleDetail.variant})
-            }
-        } catch (error) {
-            console.log(error);
-            
-        }*/
-        
     }
-    /*await Cart.deleteMany({client: sale.client})*/
 
+    await Cart.deleteMany({client: sale.client})
     return res.status(200).json(saveSale)
 }
 
