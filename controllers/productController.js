@@ -113,12 +113,11 @@ const deleteProduct = async (req, res) => {
 const editProduct = async (req, res) => {
     console.log(req);
     console.log(req.files);
-    console.log(req.files.image);
     const {id} = req.params
     const product = await Product.findById(id)
     
     if(req.files.image ){
-        const imgPath = req.files.image.path.split('//')
+        const imgPath = req.files.image.path.split('/')
         const imgString = imgPath[2]
         console.log(imgPath);
         console.log(imgString);
