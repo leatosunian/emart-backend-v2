@@ -11,6 +11,13 @@ import bodyparser from "body-parser"
 import { createServer } from "http"
 import { Server } from "socket.io"
 import cors from 'cors'
+import cron from 'node-cron'
+import Sale from "./models/Sale.js"
+
+cron.schedule(' 0 0 * * * ', async () => {
+  await Sale.deleteMany({status: 'created'})
+  console.log('pending sales deleted');
+});
 
 const app = express()
 const httpServer = createServer(app);
