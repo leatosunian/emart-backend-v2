@@ -106,9 +106,7 @@ const saleVerification = async (req, res) => {
         }
     }).then( async (response) => {
         const {data} = response
-        console.log(data)
         const saleToUpdate = await Sale.findOne({_id:data.metadata.sale_id})
-        console.log(saleToUpdate);
         saleToUpdate.transaction = data.id
         // PAYMENT PENDING //
         if(data.status == 'pending' || data.status == 'in_process'){
